@@ -38,7 +38,7 @@ train_binary_data = binarization(train_data,threshold)      #binary training exa
 # Hyperparameters
 hidden_units = 64
 visible_units = train_binary_data.shape[1]
-epochs = 2
+epochs = 10
 lr = 0.01      #learning rate
 CD_steps = 4
 
@@ -73,9 +73,7 @@ def training(bdata,weights,epochs,lr,CD_steps,hidden_units):
             hidden_act = sigmoid(hidden_pre_act) 
             hidden_act[:,0] = 1       # as 1st column is garbage, make it bias state of h   [1,h1,h2,......] --- (0,1)
             
-            sto_rand = np.random.rand(data.shape[0],hidden_units) 
-            print(sto_rand.shape)
-            print(hidden_act.shape)
+            sto_rand = np.random.rand(data.shape[0],hidden_units+1)   #+1 for dummy index 0 
             hidden_state = hidden_act > sto_rand       #stochasticity [binary]
             data_expectation = np.dot(data.T,hidden_act)
             
@@ -95,18 +93,19 @@ def training(bdata,weights,epochs,lr,CD_steps,hidden_units):
             else:
                 model_hidden_act[:,0] = 1  #fix biases
             
-            model_expectation = np.dot(visible_act,model_hidden_act)
+            model_expectation = np.dot(visible_act.T,model_hidden_act)
             
         weights = weights + lr * ((data_expectation-model_expectation)/data.shape[0])      #update rule
         
-        error = np.sum((data-visible_act)**2)
-        print("Error after epoch %s is %s" %(i,error))
-        print("Accuracy after epoch %s is %s" %(i,1-error))
+        error = np.mean((data-visible_act)**2)
+        print("Epoch = \t %s \t\t Error = \t %s \t\t Accuracy = \t %s" %(i+1,error,1-error))
     return weights
             
 weights = training(valid_binary_data,weights,epochs,lr,CD_steps,hidden_units)        
+
+print(weights)
             
-            
+
 
             
             
