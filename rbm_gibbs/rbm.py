@@ -21,28 +21,30 @@ class rbm:
 	def gibbs_sampling(self, k, r):
 		v_0 = np.random.choice(a=[False, True], size=(1,self.m))
 		v = v_0.astype(int)
-		samples = np.zeros([r, self.m])
+		v = np.insert(v, 0, 1)
+		samples = np.zeros([r, self.m + 1])
 		
 		#perfoming k state transitions to reach stationary distribution
 		for i in range(k):
 			h = sigmoid(np.dot(v, self.W))
-			h[0,0] = 1 #discarding garbage due to bias consideration
-			h_binary = h > np.random.rand(self.n) #binarisation
+			#print(h.shape)
+			h[0] = 1 #discarding garbage due to bias consideration
+			h_binary = h > np.random.rand(self.n + 1) #binarisation
 			h_binary = h_binary.astype(int)
 			v_ = sigmoid(np.dot(h_binary, self.W.T))
-			v_[0,0] = 1 #discarding garbage due to bias consideration
-			v = v_ > np.random.rand(self.m)
+			v_[0] = 1 #discarding garbage due to bias consideration
+			v = v_ > np.random.rand(self.m + 1)
 			v = v.astype(int)
 
 		#generating 'r' representative samples for v
 		for i in range(r):
 			h = sigmoid(np.dot(v, self.W))
-			h[0,0] = 1 #discarding garbage due to bias consideration
-			h_binary = h > np.random.rand(self.n) #binarisation
+			h[0] = 1 #discarding garbage due to bias consideration
+			h_binary = h > np.random.rand(self.n + 1) #binarisation
 			h_binary = h_binary.astype(int)
 			v_ = sigmoid(np.dot(h_binary, self.W.T))
-			v_[0,0] = 1 #discarding garbage due to bias consideration
-			v = v_ > np.random.rand(self.m)
+			v_[0] = 1 #discarding garbage due to bias consideration
+			v = v_ > np.random.rand(self.m + 1)
 			v = v.astype(int)
 			samples[i, :] = v
 
@@ -61,22 +63,24 @@ class rbm:
 				#Gibb's Sampling
 				samples = self.gibbs_sampling(k, r)
 				#Computing grad_wrt_data
-				grad_wrt_data = np.dot(data[data_point, :].T,sigmoid(np.dot(data[data_point, :], self.W)))
+				working_data = data[data_point, :].reshape([1, data.shape[1]])
+				grad_wrt_data = np.dot(working_data.T,sigmoid(np.dot(working_data, self.W)))
 				#Calulating average over all samples for grad_wrt_samples
 				grad_wrt_samples = np.zeros(self.W.shape)
 				for sample in range(r):
-					grad_wrt_samples +=	np.dot(samples[sample, :].T,sigmoid(np.dot(samples[sample, :], self.W)))
+					working_sample = samples[sample, :].reshape([1, samples.shape[1]])
+					grad_wrt_samples +=	np.dot(working_sample.T,sigmoid(np.dot(working_sample, self.W)))
 				grad_wrt_samples = grad_wrt_samples / r 
 				#Update
 				self.W = self.W + (eta * (grad_wrt_data - grad_wrt_samples))
 				if verbose == True:
 					h_observed = sigmoid(np.dot(data[data_point, :], self.W))
-					h_observed[0,0] = 1 #discarding garbage due to bias consideration
-					h_observed_binary = h_observed > np.random.rand(self.n) #binarisation
+					h_observed[0] = 1 #discarding garbage due to bias consideration
+					h_observed_binary = h_observed > np.random.rand(self.n + 1) #binarisation
 					h_observed_binary = h_observed_binary.astype(int)
 					v_observed = sigmoid(np.dot(h_observed_binary, self.W.T))
-					v_observed[0,0] = 1 #discarding garbage due to bias consideration
-					v_eror = v_observed > np.random.rand(self.m)
+					v_observed[0] = 1 #discarding garbage due to bias consideration
+					v_error = v_observed > np.random.rand(self.m +1)
 					v_error = v_error.astype(int)
 					squared_error = np.linalg.norm(data[data_point, :] - v_error) ** 2
 					print("reconstruction error(sq. error) for data point %d in epoch %d is %f" % (data_point, epoch, squared_error))
