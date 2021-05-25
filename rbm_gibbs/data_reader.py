@@ -16,9 +16,6 @@ def rbm_data_reader(train_file_path, test_file_path, validation_split, threshold
 	
 	#np.random.shuffle(train_data)#randomly shuffling the data
 	#np.random.shuffle(test_data)
-
-	train_data = train_data.values[:,1:]
-	test_data = test_data.values[:,1:]
 	
 	total_count_train = len(train_data)
 	validation_count = int(validation_split * total_count_train)
