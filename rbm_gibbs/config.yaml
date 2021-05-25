@@ -1,3 +1,8 @@
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
 program: main.py
 method: grid
 metric: 
@@ -11,9 +16,11 @@ parameters:
   gibbs_samples:
     values: [10, 20, 30]
   rbm_epoch:
-    values: [1, 3, 5, 7]
+    values: [1]
 early_terminate:
   type: hyperband
   s: 2
   eta: 3
   max_iter: 27
+
+  

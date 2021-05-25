@@ -18,7 +18,7 @@ def train_and_evaluate(num_hidden_nodes, num_markov_chain_iterations, num_sample
 	
 	print("Learning Hidden Representation of the data using RBM...")
 	rbm_gibbs = rbm.rbm(training_data.shape[1], num_hidden_nodes)
-	rbm_gibbs.train_gibbs(training_data, num_markov_chain_iterations, num_samples_extracted, rbm_training_epochs, 0.01)
+	rbm_gibbs.train_gibbs(training_data, num_markov_chain_iterations, num_samples_extracted, rbm_training_epochs, 0.01, False)
 	hidden_representation_validation = rbm_gibbs.get_hidden_representation(validation_data)
 	hidden_representation_test = rbm_gibbs.get_hidden_representation(test_data)
 
