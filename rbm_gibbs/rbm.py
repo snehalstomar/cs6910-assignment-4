@@ -59,6 +59,7 @@ class rbm:
 		eta = learning_rate
 
 		for epoch in range(epochs):
+			squared_error = 0
 			for data_point in range(num_examples):
 				#Gibb's Sampling
 				samples = self.gibbs_sampling(k, r)
@@ -82,8 +83,16 @@ class rbm:
 					v_observed[0] = 1 #discarding garbage due to bias consideration
 					v_error = v_observed > np.random.rand(self.m +1)
 					v_error = v_error.astype(int)
-					squared_error = np.linalg.norm(data[data_point, :] - v_error) ** 2
-					print("reconstruction error(sq. error) for data point %d in epoch %d is %f" % (data_point, epoch, squared_error))
+					squared_error += np.linalg.norm(data[data_point, :] - v_error) ** 2
+					print("data point-> %d" % (data_point))
+			squared_error = squared_error / num_examples
+			print("epoch->", epoch+1, "sq_recon_error->", squared_error)
 
+	def get_hidden_representation(self, data):
+		data = np.insert(data, 0, 1, axis = 1)
+		H = np.dot(data, self.W)
+		H_out = H[1:, :].reshape(data.shape)
+		return H_out	
 
+						
 

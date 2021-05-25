@@ -10,9 +10,6 @@ def binarization(data,threshold):
 def rbm_data_reader(train_file_path, test_file_path, validation_split, threshold):
 	train_data = pd.read_csv(train_file_path)
 	test_data = pd.read_csv(test_file_path)
-
-	train_data = train_data.values[:,1:]
-	test_data = test_data.values[:,1:]
 	
 	np.random.shuffle(train_data)#randomly shuffling the data
 	np.random.shuffle(test_data)
@@ -23,8 +20,16 @@ def rbm_data_reader(train_file_path, test_file_path, validation_split, threshold
 	validation_data = train_data[0:validation_count,:]
 	train_data = train_data[validation_count:,:]
 	
+	validation_labels = validation_data.values[:, 0]
+	train_labels = train_data.values[:, 0]
+	test_labels = test_data.values[:, 0]
+
+	validation_data = validation_data.values[:, 1:]
+	train_data = train_data.values[:,1:]
+	test_data = test_data.values[:,1:]
+
 	validation_binary_data = binarization(validation_data,threshold)
 	train_binary_data = binarization(train_data,threshold)
 	test_binary_data = binarization(test_data,threshold)
 
-	return validation_binary_data,train_binary_data, test_binary_data
+	return validation_binary_data,train_binary_data, test_binary_data, validation_labels, train_labels, test_labels
