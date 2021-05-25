@@ -13,7 +13,7 @@ File Structure:
 + Question1 -> rbm_gibbs/rbm.py
 + Question2 -> rbm_gibbs/rbm.py, rbm_gibbs/data_reader.py, and rbm_gibbs/main.py| Please run 'rbm_gibbs/main.py' for visualisation of results
 + Question4 -> with_wandb.py
-+ Question6 -> Q6a.py(for finding 'm'); rbm_gibbs/gibbs_training_visualiser.py(for visualisation of hidden representations)
++ Question6 -> Q6_a.py(for finding 'm'); rbm_gibbs/gibbs_training_visualiser.py(for visualisation of hidden representations)
 + Question7 -> Q7_sep.py
 
 Requirements:
