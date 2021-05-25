@@ -91,7 +91,7 @@ class rbm:
 	def get_hidden_representation(self, data):
 		data = np.insert(data, 0, 1, axis = 1)
 		H = np.dot(data, self.W)
-		H_out = H[1:, :].reshape(data.shape)
+		H_out = H[:, 1:]#.reshape([data.shape[0], self.n])
 		return H_out	
 
 						
