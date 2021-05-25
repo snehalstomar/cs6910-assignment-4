@@ -38,6 +38,6 @@ if __name__ == '__main__':
 	wandb.init(config=hyperparameter_defaults, project="cs6910-assignment-4")
 	config = wandb.config
 	
-  accuracy, loss = train_and_evaluate(config.hidden_sz, config.markov_iter, config.gibbs_samples, config.rbm_epoch)
+	accuracy, loss = train_and_evaluate(config.hidden_sz, config.markov_iter, config.gibbs_samples, config.rbm_epoch)
 	metrics = {'accuracy': accuracy, 'loss':loss}
 	wandb.log(metrics)
