@@ -20,10 +20,10 @@ Requirements:
 + Python(>=3.7), numpy, pandas, sklearn(for logistic regression)
 + Assuming that this repository will be cloned as 'cs6910-assignmnet-4'; please ensure that the following files are present at the specified paths:
 
-i.'cs6910-assignment-4/fashion-mnist_train.csv'
-ii. 'cs6910-assignment-4/fashion-mnist_test.csv'
-iii. 'cs6910-assignment-4/rbm_gibbs/data/fashion-mnist_train.csv'
-iv. 'cs6910-assignment-4/rbm_gibbs/data/fashion-mnist_test.csv'    
+<br/>i.'cs6910-assignment-4/fashion-mnist_train.csv'
+<br/>ii. 'cs6910-assignment-4/fashion-mnist_test.csv'
+<br/>iii. 'cs6910-assignment-4/rbm_gibbs/data/fashion-mnist_train.csv'
+<br/>iv. 'cs6910-assignment-4/rbm_gibbs/data/fashion-mnist_test.csv'    
 
 + Please ensure that while running all programs; PWD = nearest parent directory of the file.
 
