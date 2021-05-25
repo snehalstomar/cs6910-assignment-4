@@ -18,7 +18,7 @@ File Structure:
 
 Requirements:
 + Python(>=3.7), numpy, pandas, sklearn(for logistic regression)
-+ Assuming that this repository will be cloned as 'cs6910-assignmnet-4'; please ensure that the following files are present at the specified paths:
++ Assuming that this repository will be cloned as 'cs6910-assignmnet-4'; please ensure that the following files from the [Fashion-MNIST](https://www.kaggle.com/zalando-research/fashionmnist) dataset are present at the specified paths:
 
 <br/>i.'cs6910-assignment-4/fashion-mnist_train.csv'
 <br/>ii. 'cs6910-assignment-4/fashion-mnist_test.csv'
