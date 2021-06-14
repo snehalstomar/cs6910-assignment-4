@@ -26,6 +26,3 @@ Requirements:
 <br/>iv. 'cs6910-assignment-4/rbm_gibbs/data/fashion-mnist_test.csv'    
 
 + Please ensure that while running all programs; PWD = immediate parent directory of the file.
-
-
-Should the TA's face any difficulty in running the programs, they are requested to reach out to us.
