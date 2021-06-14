@@ -3,8 +3,8 @@
 This is a repository for all tasks done as part of [Assignment-4](https://wandb.ai/miteshk/assignments/reports/Assignment-4--Vmlldzo2NDUwNzE) for the course, **"CS6910: Fundamentals of Deep Learning"**; taught by Prof. Mitesh Khapra @ IIT Madras during the Jan-May 2021 semester. 
 
 Team Members:
-+ Snehal Singh Tomar
-+ Ashish Kumar
++ [Snehal Singh Tomar](snehalstomar.github.io)
++ [Ashish Kumar](https://github.com/akumar005)
 
 Report:
 + [wandb_report](https://wandb.ai/snehalstomar/cs6910-assignment-4/reports/CS6910-Assignment-4--Vmlldzo3MjUyMjA?accessToken=syry3xqmzgmerm0yjad4n3bhmtx2mot27d5loyj57v0k0d8q1qau3i2bg6b8hq0b)
